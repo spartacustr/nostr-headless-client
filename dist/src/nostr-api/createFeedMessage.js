@@ -1,0 +1,1 @@
+export const createFeedMessage=(subscriptionId,authors)=>JSON.stringify(["REQ",subscriptionId,{authors,kinds:[1],limit:10}]);
