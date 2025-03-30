@@ -58,7 +58,7 @@ export const createRelayConnection = (relayEndpoint: string, feedSettings: FeedS
 
    const FeedObservable = RelayObservable.pipe(
        filter(message => message.msgContent?.kind === 1),
-       map(message => message.msgContent)
+       map(message => message.msgContent),
    );
 
    const sendFeedMessage = (authors: string[]) => {
