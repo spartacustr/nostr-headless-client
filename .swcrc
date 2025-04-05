@@ -15,8 +15,8 @@
   },
   "module": {
     "type": "nodenext",
-    "strict": false,
-    "strictMode": false,
+    "strict": true,
+    "strictMode": true,
     "noInterop": false,
     "lazy": false
   },
