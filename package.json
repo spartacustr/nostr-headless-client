@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "engines": {
-    "node": "^22"
+    "node": "^23"
   },
   "scripts": {
     "build": "rm -rf dist && swc src --out-dir dist --copy-files && tsc --emitDeclarationOnly",
