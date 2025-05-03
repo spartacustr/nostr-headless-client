@@ -1,1 +1,0 @@
-export const createFollowListMessage=(subscriptionId,author)=>JSON.stringify(["REQ",subscriptionId,{authors:[author],kinds:[3]}]);

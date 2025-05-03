@@ -20,5 +20,6 @@
     "noInterop": false,
     "lazy": false
   },
-  "minify": true
+  "minify": true,
+  "sourceMaps": true
 }

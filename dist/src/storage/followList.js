@@ -1,1 +1,0 @@
-const FollowList={};export const saveFollowList=({author,keys})=>{FollowList[author]=keys;return FollowList[author]};
