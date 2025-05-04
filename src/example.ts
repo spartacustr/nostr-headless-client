@@ -1,4 +1,4 @@
-import { connect } from "./clients/rxClient.js";
+import { connect, RelayMsgData } from "./clients/rxClient.js";
 import {
   createFollowListMessage,
   createMetadataMessage,
@@ -46,13 +46,13 @@ Connection.FollowListObservable.subscribe({
   error: (err) => console.error(err),
 });
 
-const Notes: unknown[] = [];
+const Notes: RelayMsgData[] = [];
 
 Connection.K1Observable.subscribe({
   next: (data) => {
     Notes.push(data);
     console.log("Notes len", Notes.length);
-    console.log(JSON.stringify(Notes, null, 2));
+    console.log(data);
   },
   complete: () => console.log("Completed K1Obs"),
   error: (err) => console.error(err),

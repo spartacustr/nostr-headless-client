@@ -11,16 +11,18 @@ import {
   mergeAll,
   distinctUntilKeyChanged,
 } from "rxjs";
+import { verifyMessage } from "../utils/verifyMessage.js";
 
 type RelayMsgSubscriptionId = string;
 type RelayMsgType = "EVENT" | "REQ" | "CLOSE" | "EOSE";
-type RelayMsgData = {
+export type RelayMsgData = {
   id: string;
   created_at: number;
   kind: number;
   pubkey: string;
   sig: string;
   tags: Array<["p" | "e", string, string]>;
+  content: string;
 };
 
 type RelayMessage = {
@@ -101,10 +103,8 @@ export const createRelayConnection = (relayEndpoint: string, SubId: string) => {
         message.msgContent?.kind === 1 &&
         !message.msgContent.tags.map(([t]) => t).includes("e"),
     ),
-    map((message) => ({
-      ...message.msgContent,
-      date: new Date(message.msgContent.created_at * 1000),
-    })),
+    filter((message) => verifyMessage(message.msgContent)),
+    map((message) => message.msgContent),
   );
 
   const sendMessage = (message: NostrMessage) =>

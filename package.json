@@ -26,6 +26,7 @@
   ],
   "author": "npub1klnd450j7j6wf4u5jyclamhtq74dsucj525m97nj2k5j9nw462pq0q6xyr",
   "dependencies": {
+    "@noble/curves": "^1.9.0",
     "@noble/hashes": "^1.7.2",
     "@scure/base": "^1.2.4",
     "rxjs": "^7.8.2",
