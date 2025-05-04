@@ -1,6 +1,6 @@
 {
   "name": "nostr-headless-client",
-  "version": "0.0.6",
+  "version": "0.0.7-0",
   "description": "A headless nostr client implemented in javascript/ts",
   "main": "dist/src/index.js",
   "type": "module",
