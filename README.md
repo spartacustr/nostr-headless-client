@@ -37,8 +37,9 @@ const relays = ['wss://relay1.com', 'wss://relay2.com'];
 const nostrClient = connect(relays);
 
 // Subscribe to connection statuses
-nostrClient.ConnectionObservable.subscribe((status) => {
-    console.log('Relay Connection Status:', status);
+nostrClient.ConnectionObservable.subscribe({
+    next: (data) => console.log(data),
+    complete: () => console.log('Relay connection finished.')
 });
 
 // Send a message to the relays
