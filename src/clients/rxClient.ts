@@ -4,7 +4,7 @@ import {Observable, filter, map, of, take, combineLatest, mergeMap, from, mergeA
 const MySubId = 'One'
 
 type RelayMsgSubscriptionId = string
-type RelayMsgType = 'EVENT' | 'REQ' | 'CLOSE'
+type RelayMsgType = 'EVENT' | 'REQ' | 'CLOSE' | 'EOSE'
 type RelayMsgData = {
     id: string;
     created_at: number;
@@ -51,6 +51,14 @@ export const createRelayConnection = (relayEndpoint: string) => {
 
    const RelayObservable = createRelayObservable(ws);
 
+   const EOSEObservable = RelayObservable.pipe(filter(message => message.msgType === 'EOSE'))
+
+   EOSEObservable.subscribe({
+    next: (data) => {
+        ws.send(JSON.stringify(["CLOSE", data.msgSubId]))
+    }
+   })
+
    const MetadataObservable = RelayObservable.pipe(filter(message => message.msgContent?.kind === 0))
 
    const FollowListObservable = RelayObservable.pipe(
@@ -73,12 +81,9 @@ export const createRelayConnection = (relayEndpoint: string) => {
        K1Observable,
        MetadataObservable,
        sendMessage,
-       close: () => { 
-        ws.close() 
-},
+       close: () => {     ws.close() },
    }
 }
-
 
 export const connect = (relays: string[]) => {
     const connections = relays.map(r => createRelayConnection(r));
